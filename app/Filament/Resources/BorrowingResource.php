@@ -5,7 +5,6 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BorrowingResource\Pages;
 use App\Filament\Resources\BorrowingResource\RelationManagers;
 use App\Models\Borrowing;
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -21,16 +20,10 @@ use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Repeater;
-use Filament\Tables\Actions\ButtonAction;
-use Filament\Forms\Components\Select;
 use PhpParser\Node\Stmt\Label;
 use App\Models\Stock_item;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Enums\FiltersLayout;
-use Filament\Facades\Filament;
-use Filament\Forms\Components\Fieldset;
-use Filament\Forms\Components\Section;
 
 class BorrowingResource extends Resource
 {

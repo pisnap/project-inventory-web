@@ -5,7 +5,6 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\StockItemResource\Pages;
 use App\Filament\Resources\StockItemResource\RelationManagers;
 use App\Models\Stock_item;
-use App\Models\Borrowing;
 use App\Models\Category;
 use Filament\Forms;
 use Filament\Forms\Form;

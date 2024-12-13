@@ -5,8 +5,6 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ReturningResource\Pages;
 use App\Filament\Resources\ReturningResource\RelationManagers;
 use App\Models\Returning;
-use App\Models\Stock_item;
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
