@@ -16,6 +16,7 @@ class ItemsSummary extends BaseWidget
     public function table(Table $table): Table
     {
         return $table
+            ->defaultPaginationPageOption(5)
             ->query(
                 Stock_item::query()
                     ->selectRaw('
@@ -37,23 +38,24 @@ class ItemsSummary extends BaseWidget
             )
             ->columns([
                 TextColumn::make('item_name')
+                    ->searchable()
                     ->label('Item')
                     ->badge()
-                    ->url(fn ($record) => route('filament.admin.resources.all-item.index', [
+                    ->url(fn($record) => route('filament.admin.resources.all-item.index', [
                         'tableFilters[items][value]' => $record->item_name,
                     ])),
                 TextColumn::make('total_items')
                     ->label('Total')
                     ->badge()
                     ->color('primary')
-                    ->url(fn ($record) => route('filament.admin.resources.all-item.index', [
+                    ->url(fn($record) => route('filament.admin.resources.all-item.index', [
                         'tableFilters[items][value]' => $record->item_name,
                     ])),
                 TextColumn::make('good_items')
                     ->label('Good')
                     ->badge()
                     ->color('success')
-                    ->url(fn ($record) => route('filament.admin.resources.all-item.index', [
+                    ->url(fn($record) => route('filament.admin.resources.all-item.index', [
                         'tableFilters[items][value]' => $record->item_name,
                         'tableFilters[condition][value]' => 'Good',
                     ])),
@@ -61,7 +63,7 @@ class ItemsSummary extends BaseWidget
                     ->label('Broken')
                     ->badge()
                     ->color('danger')
-                    ->url(fn ($record) => route('filament.admin.resources.all-item.index', [
+                    ->url(fn($record) => route('filament.admin.resources.all-item.index', [
                         'tableFilters[items][value]' => $record->item_name,
                         'tableFilters[condition][value]' => 'Broken',
                     ])),
@@ -69,7 +71,7 @@ class ItemsSummary extends BaseWidget
                     ->label('Borrow')
                     ->badge()
                     ->color('warning')
-                    ->url(fn ($record) => route('filament.admin.resources.all-item.index', [
+                    ->url(fn($record) => route('filament.admin.resources.all-item.index', [
                         'tableFilters[items][value]' => $record->item_name,
                         'tableFilters[status][value]' => 'Borrow',
                     ])),

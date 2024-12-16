@@ -30,7 +30,7 @@ class AdminPanelProvider extends PanelProvider
             ->spa()
             ->unsavedChangesAlerts()
             ->profile(EditProfile::class)
-            // ->topNavigation()
+            ->topNavigation()
             ->maxContentWidth(MaxWidth::Full)
             ->id('admin')
             ->path('')
@@ -40,7 +40,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogo(asset('/logoKP.png'))
             ->brandLogoHeight('1.5rem')
             ->font('Poppins')
-            ->sidebarFullyCollapsibleOnDesktop()
+            // ->sidebarFullyCollapsibleOnDesktop()
             ->colors([
                 'primary' => Color::Blue,
             ])
