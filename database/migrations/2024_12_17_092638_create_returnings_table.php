@@ -12,8 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('returnings', function (Blueprint $table) {
-            $table->id();
+            $table->integer('id', true);
+            $table->string('returner_name');
+            $table->string('code_item')->index('code_item');
+            $table->string('returned_item');
+            $table->bigInteger('amount');
+            $table->string('return_date');
+            $table->enum('status', ['Return', 'Borrow']);
             $table->timestamps();
+            $table->bigInteger('user_id')->default(1);
         });
     }
 

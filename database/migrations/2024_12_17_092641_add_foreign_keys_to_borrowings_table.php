@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('stock_items', function (Blueprint $table) {
-            $table->string('location');
-            $table->string('category');
+        Schema::table('borrowings', function (Blueprint $table) {
+            $table->foreign(['code_item'], 'borrowings_ibfk_1')->references(['code'])->on('stock_items')->onUpdate('restrict')->onDelete('cascade');
         });
     }
 
@@ -22,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('stock_items', function (Blueprint $table) {
-            //
+        Schema::table('borrowings', function (Blueprint $table) {
+            $table->dropForeign('borrowings_ibfk_1');
         });
     }
 };

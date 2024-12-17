@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('returnings', function (Blueprint $table) {
+            $table->foreign(['code_item'], 'returnings_ibfk_1')->references(['code_item'])->on('borrowings')->onUpdate('cascade')->onDelete('restrict');
         });
     }
 
@@ -22,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::table('returnings', function (Blueprint $table) {
+            $table->dropForeign('returnings_ibfk_1');
+        });
     }
 };
