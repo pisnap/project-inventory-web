@@ -37,14 +37,11 @@ class CreateReturning extends CreateRecord
 
     protected function afterCreate(): void
     {
-        // Tambahkan ke tabel histories
-        \App\Models\History::create([
-            'user_name' => $this->record->returner_name, // Nama pengembali
-            'item_name' => $this->record->returned_item,     // Nama item
-            'code_item' => $this->record->code_item,     // Kode item
-            'action' => 'Return',                     // Aksi
-            'date' => now(),                            // Tanggal
-        ]);
+        \App\Models\History::where('code_item', $this->record->code_item)
+            ->update([
+                'return_action' => 'Return',
+                'return_date' => now(),
+            ]);
 
         // Update status di tabel borrowings
         \App\Models\Borrowing::where('code_item', $this->record->code_item)

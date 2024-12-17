@@ -43,7 +43,7 @@ class HistoryResource extends Resource
         return $table
             ->recordUrl(null)
             ->query(
-                History::query()->orderBy('date', 'desc')
+                History::query()->orderBy('created_at', 'desc')
             )
             ->columns([
                 TextColumn::make('user_name')
@@ -52,14 +52,21 @@ class HistoryResource extends Resource
                     ->label('Item'),
                 TextColumn::make('code_item')
                     ->label('Code'),
-                TextColumn::make('action')
+                TextColumn::make('borrow_action')
+                    ->label('Action')
+                    ->badge()
+                    ->colors([
+                        'danger' => 'Borrow',
+                    ]),
+                TextColumn::make('borrow_date')
+                    ->label('Date'),
+                TextColumn::make('return_action')
                     ->label('Action')
                     ->badge()
                     ->colors([
                         'success' => 'Return',
-                        'danger' => 'Borrow',
                     ]),
-                TextColumn::make('date')
+                TextColumn::make('return_date')
                     ->label('Date'),
             ])
             ->filters([
@@ -69,23 +76,17 @@ class HistoryResource extends Resource
                     ->options(function () {
                         return \App\Models\History::pluck('user_name', 'user_name')->unique()->toArray();
                     }),
-                    SelectFilter::make('item_name')
+                SelectFilter::make('item_name')
                     ->label('Item')
                     ->searchable()
                     ->options(function () {
                         return \App\Models\History::pluck('item_name', 'item_name')->unique()->toArray();
                     }),
-                    SelectFilter::make('code_item')
+                SelectFilter::make('code_item')
                     ->label('Code')
                     ->searchable()
                     ->options(function () {
                         return \App\Models\History::pluck('code_item', 'code_item')->unique()->toArray();
-                    }),
-                    SelectFilter::make('action')
-                    ->label('Action')
-                    ->searchable()
-                    ->options(function () {
-                        return \App\Models\History::pluck('action', 'action')->unique()->toArray();
                     }),
             ], layout: FiltersLayout::AboveContentCollapsible)
             ->filtersTriggerAction(
