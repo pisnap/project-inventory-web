@@ -26,6 +26,8 @@ use Filament\Forms\Components\Select;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Actions\Action;
+use App\Filament\Exports\StockItemExporter;
+use Filament\Tables\Actions\ExportBulkAction;
 use Illuminate\Support\Facades\DB;
 
 
@@ -107,7 +109,8 @@ class StockItemResource extends Resource
                     ->size(150),
                 TextColumn::make('category'),
                 TextColumn::make('code'),
-                TextColumn::make('items'),
+                TextColumn::make('items')
+                    ->label('Item'),
                 TextColumn::make('unit'),
                 TextColumn::make('stock'),
                 TextColumn::make('condition')
@@ -178,8 +181,12 @@ class StockItemResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
+                    ExportBulkAction::make()
+                        ->exporter(StockItemExporter::class)
+                        ->label('Export Data')
+                        ->icon('heroicon-o-document-arrow-up'),
                     Tables\Actions\DeleteBulkAction::make(),
-                ])
+                ])->label('Action'),
             ]);
     }
 

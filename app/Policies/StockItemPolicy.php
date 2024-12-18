@@ -75,4 +75,9 @@ class StockItemPolicy
         return $user->role == 'Admin';
     }
 
+    public function export(User $user): bool
+    {
+        // Contoh: Hanya pengguna dengan role "Admin" yang dapat eksport data
+        return $user->role === 'Admin';
+    }
 }

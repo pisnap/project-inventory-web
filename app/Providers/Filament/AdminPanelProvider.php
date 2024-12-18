@@ -26,6 +26,7 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
+            ->databaseNotifications()
             ->breadcrumbs(false)
             ->spa()
             ->unsavedChangesAlerts()
