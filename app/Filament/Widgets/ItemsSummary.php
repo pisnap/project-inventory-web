@@ -21,7 +21,7 @@ class ItemsSummary extends BaseWidget
                 Stock_item::query()
                     ->selectRaw('
                         MIN(stock_items.id) as id,
-                        stock_items.items as item_name,
+                        stock_items.items,
                         COUNT(*) as total_items,
                         SUM(CASE WHEN stock_items.condition = "good" THEN 1 ELSE 0 END) as good_items,
                         SUM(CASE WHEN stock_items.condition = "broken" THEN 1 ELSE 0 END) as broken_items,
@@ -37,26 +37,26 @@ class ItemsSummary extends BaseWidget
                     ->orderBy('stock_items.items')
             )
             ->columns([
-                TextColumn::make('item_name')
+                TextColumn::make('items')
                     ->searchable()
                     ->label('Item')
                     ->badge()
                     ->url(fn($record) => route('filament.admin.resources.all-item.index', [
-                        'tableFilters[items][value]' => $record->item_name,
+                        'tableFilters[items][value]' => $record->items,
                     ])),
                 TextColumn::make('total_items')
                     ->label('Total')
                     ->badge()
                     ->color('primary')
                     ->url(fn($record) => route('filament.admin.resources.all-item.index', [
-                        'tableFilters[items][value]' => $record->item_name,
+                        'tableFilters[items][value]' => $record->items,
                     ])),
                 TextColumn::make('good_items')
                     ->label('Good')
                     ->badge()
                     ->color('success')
                     ->url(fn($record) => route('filament.admin.resources.all-item.index', [
-                        'tableFilters[items][value]' => $record->item_name,
+                        'tableFilters[items][value]' => $record->items,
                         'tableFilters[condition][value]' => 'Good',
                     ])),
                 TextColumn::make('broken_items')
@@ -64,7 +64,7 @@ class ItemsSummary extends BaseWidget
                     ->badge()
                     ->color('danger')
                     ->url(fn($record) => route('filament.admin.resources.all-item.index', [
-                        'tableFilters[items][value]' => $record->item_name,
+                        'tableFilters[items][value]' => $record->items,
                         'tableFilters[condition][value]' => 'Broken',
                     ])),
                 TextColumn::make('borrowed_items')
@@ -72,7 +72,7 @@ class ItemsSummary extends BaseWidget
                     ->badge()
                     ->color('warning')
                     ->url(fn($record) => route('filament.admin.resources.all-item.index', [
-                        'tableFilters[items][value]' => $record->item_name,
+                        'tableFilters[items][value]' => $record->items,
                         'tableFilters[status][value]' => 'Borrow',
                     ])),
             ]);

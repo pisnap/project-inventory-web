@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use Illuminate\Support\Str;
 use App\Filament\Resources\StockItemResource\Pages;
 use App\Filament\Resources\StockItemResource\RelationManagers;
 use App\Models\Stock_item;
@@ -175,7 +176,23 @@ class StockItemResource extends Resource
                     ViewAction::make(),
                     EditAction::make(),
                     ReplicateAction::make()
-                        ->excludeAttributes(['code', 'status']),
+                        ->beforeReplicaSaved(function (Stock_item $replica): void {
+                            // Ambil nilai asli dari kolom 'code'
+                            $originalCode = $replica->code;
+
+                            // Variabel untuk menyimpan code baru
+                            $newCode = $originalCode . '-copy';
+
+                            // Cek apakah code baru sudah ada dalam database
+                            $counter = 1;
+                            while ($replica->where('code', $newCode)->exists()) {
+                                $newCode = $originalCode . '-copy-' . $counter;
+                                $counter++;
+                            }
+
+                            // Set code baru ke model replica
+                            $replica->code = $newCode;
+                        }),
                     DeleteAction::make(),
                 ])->icon('heroicon-m-ellipsis-horizontal'),
             ])

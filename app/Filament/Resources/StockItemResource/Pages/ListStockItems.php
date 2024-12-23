@@ -6,6 +6,8 @@ use App\Filament\Resources\StockItemResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use App\Filament\Exports\StockItemExporter;
+use App\Filament\Imports\StockItemImporter;
+use Filament\Support\Colors\Color;
 use App\Models\Stock_item;
 use App\Models\User;
 
@@ -16,18 +18,23 @@ class ListStockItems extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ExportAction::make()
-            ->label('Export Data')
+            Actions\ImportAction::make()
+            ->color('primary')
+            ->label('Import Data')
+            ->modalHeading('Import Data')
             ->icon('heroicon-o-arrow-down-tray')
-            ->exporter(StockItemExporter::class),
-            // ->action(function () {
-            //     $this->authorize('export', Stock_item::class);
-            // })
-            // ->hidden(fn (User $user) => ! $user->can('export', Stock_item::class)),
+            ->importer(StockItemImporter::class)
+            ->hidden(fn () => auth()->user()->role !== 'Admin'),
+            Actions\ExportAction::make()
+            ->color('primary')
+            ->label('Export Data')
+            ->modalHeading('Export Data')
+            ->icon('heroicon-o-arrow-up-tray')
+            ->exporter(StockItemExporter::class)
+            ->hidden(fn () => auth()->user()->role !== 'Admin'),
             Actions\CreateAction::make()
             ->icon('heroicon-o-plus')
             ->label('Add New Item'),
         ];
     }
-
 }
