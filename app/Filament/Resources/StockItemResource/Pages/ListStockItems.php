@@ -9,7 +9,8 @@ use App\Filament\Exports\StockItemExporter;
 use App\Filament\Imports\StockItemImporter;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
-use Filament\Support\Colors\Color;
+use Filament\Notifications\Notification;
+use Filament\Pages\Actions\Action;
 use App\Models\Stock_item;
 use App\Models\User;
 
@@ -27,6 +28,13 @@ class ListStockItems extends ListRecords
                 ->action(function (array $data): void {
                     \App\Models\Stock_item::where('items', $data['item'])
                         ->update(['image' => $data['image']]);
+
+                    // Add a notification after successful update
+                    Notification::make()
+                        ->title('Image Updated')
+                        ->success()
+                        ->body("The image for item '{$data['item']}' has been successfully updated.")
+                        ->send();
                 })
                 ->form([
                     Select::make('item')
