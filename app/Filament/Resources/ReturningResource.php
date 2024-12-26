@@ -51,6 +51,8 @@ class ReturningResource extends Resource
                     ->autofocus()
                     ->rules(['exists:borrowings,code_item'])
                     ->afterStateUpdated(function (callable $set, $state, $get) {
+                        $state = strtoupper($state);
+                        $set('code_item', $state);
                         // Cari data borrowing berdasarkan code_item
                         $stockItem = \App\Models\Stock_item::where('code', $state)->first();
                         if (!$stockItem) {

@@ -59,7 +59,8 @@ class HistoryResource extends Resource
                         'danger' => 'Borrow',
                     ]),
                 TextColumn::make('borrow_date')
-                    ->label('Date'),
+                    ->label('Date')
+                    ->dateTime('m-d H:i'),
                 TextColumn::make('return_action')
                     ->label('Action')
                     ->badge()
@@ -67,7 +68,8 @@ class HistoryResource extends Resource
                         'success' => 'Return',
                     ]),
                 TextColumn::make('return_date')
-                    ->label('Date'),
+                    ->label('Date')
+                    ->dateTime('m-d H:i'),
             ])
             ->filters([
                 SelectFilter::make('user_name')

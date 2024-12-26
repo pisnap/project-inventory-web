@@ -51,6 +51,8 @@ class BorrowingResource extends Resource
                     ->label('Code')
                     ->rules(['exists:stock_items,code'])
                     ->afterStateUpdated(function (callable $set, $state, $get) {
+                        $state = strtoupper($state);
+                        $set('code_item', $state);
                         $latestBorrowing = \App\Models\Borrowing::where('code_item', $state)->first();
 
                         if ($latestBorrowing && $latestBorrowing->status !== 'Return') {

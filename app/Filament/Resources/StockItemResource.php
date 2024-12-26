@@ -41,6 +41,7 @@ class StockItemResource extends Resource
     protected static ?string $label = 'Item';
     protected static ?string $slug = 'all-item';
     protected static ?int $navigationSort = 1;
+    protected static string $view = 'filament.resources.users.pages.view-user';
 
     public static function form(Form $form): Form
     {
@@ -70,7 +71,13 @@ class StockItemResource extends Resource
                     }),
                 TextInput::make('code')
                     ->unique(ignoreRecord: true)
-                    ->required(),
+                    ->required()
+                    ->reactive()
+                    ->afterStateUpdated(function (callable $set, $state) {
+                        $state = strtoupper($state); // Ubah menjadi huruf kapital
+                        $set('code', $state); // Tetapkan nilai huruf kapital kembali ke input
+                    }),
+
                 TextInput::make('items')
                     ->required(),
                 TextInput::make('unit')
