@@ -2,28 +2,24 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ReturningResource\Pages;
-use App\Filament\Resources\ReturningResource\RelationManagers;
-use App\Models\Returning;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Form;
+use App\Models\Returning;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\TextInput;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Tables\Actions\ActionGroup;
-use Filament\Tables\Actions\DeleteAction;
+use Filament\Resources\Resource;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Enums\FiltersLayout;
-use Filament\Tables\Actions\Action;
-use Filament\Facades\Filament;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Filters\SelectFilter;
+use App\Filament\Resources\ReturningResource\Pages;
 
-use PhpParser\Node\Stmt\Return_;
+use App\Filament\Resources\ReturningResource\RelationManagers;
 
 class ReturningResource extends Resource
 {

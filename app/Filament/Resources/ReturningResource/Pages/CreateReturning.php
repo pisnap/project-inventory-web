@@ -53,4 +53,11 @@ class CreateReturning extends CreateRecord
         \App\Models\Stock_item::where('code', $this->record->code_item)
             ->update(['status' => 'Available']);
     }
+
+    protected function getFooterWidgets(): array
+    {
+        return [
+            \App\Filament\Resources\ReturningResource\Widgets\TableReturningWidget::class,
+        ];
+    }
 }

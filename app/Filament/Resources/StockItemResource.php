@@ -2,35 +2,29 @@
 
 namespace App\Filament\Resources;
 
-use Illuminate\Support\Str;
-use App\Filament\Resources\StockItemResource\Pages;
-use App\Filament\Resources\StockItemResource\RelationManagers;
-use App\Models\Stock_item;
-use App\Models\Category;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use App\Models\Category;
+use Filament\Forms\Form;
+use App\Models\Stock_item;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Tables\Actions\ActionGroup;
-use Filament\Tables\Actions\DeleteAction;
+use Filament\Resources\Resource;
+use Filament\Tables\Actions\Action;
+use Filament\Forms\Components\Select;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Actions\ReplicateAction;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Select;
-use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Enums\FiltersLayout;
-use Filament\Tables\Actions\Action;
+use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Filters\SelectFilter;
 use App\Filament\Exports\StockItemExporter;
+use Filament\Tables\Actions\ReplicateAction;
 use Filament\Tables\Actions\ExportBulkAction;
-use Illuminate\Support\Facades\DB;
-
+use App\Filament\Resources\StockItemResource\Pages;
 
 class StockItemResource extends Resource
 {

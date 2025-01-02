@@ -2,28 +2,23 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\BorrowingResource\Pages;
-use App\Filament\Resources\BorrowingResource\RelationManagers;
-use App\Models\Borrowing;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Form;
+use App\Models\Borrowing;
+use App\Models\Stock_item;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Tables\Actions\ActionGroup;
+use Filament\Resources\Resource;
 use Filament\Tables\Actions\Action;
-use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ReplicateAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\TextInput;
-use PhpParser\Node\Stmt\Label;
-use App\Models\Stock_item;
-use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Filters\SelectFilter;
+use App\Filament\Resources\BorrowingResource\Pages;
 
 class BorrowingResource extends Resource
 {

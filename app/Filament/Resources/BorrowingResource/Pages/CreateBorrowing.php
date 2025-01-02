@@ -12,10 +12,6 @@ use Filament\Tables;
 
 class CreateBorrowing extends CreateRecord
 {
-    // public $name = 'Pisnap';
-
-    // // protected static string $view = 'filament.pages.create-borrowing';
-
     protected static string $resource = BorrowingResource::class;
 
     protected static bool $canCreateAnother = false;
@@ -57,5 +53,12 @@ class CreateBorrowing extends CreateRecord
 
         \App\Models\Stock_item::where('code', $this->record->code_item)
             ->update(['status' => 'Borrow']);
+    }
+
+    protected function getFooterWidgets(): array
+    {
+        return [
+            \App\Filament\Resources\BorrowingResource\Widgets\TableBorrowingWidget::class,
+        ];
     }
 }
