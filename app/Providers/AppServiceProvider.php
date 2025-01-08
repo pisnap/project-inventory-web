@@ -2,10 +2,11 @@
 
 namespace App\Providers;
 
+use Filament\Tables\Table;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Filament\Support\Facades\FilamentView;
-use Filament\Tables\Table;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
         Table::configureUsing(function (Table $table) {
             $table->paginated([10, 25, 50, 100]);
         });
-        
+
         FilamentView::registerRenderHook(
             'panels::scripts.after',
             fn(): string => Blade::render('
@@ -36,5 +37,9 @@ class AppServiceProvider extends ServiceProvider
             }
         </script>'),
         );
+
+        if(env('APP_ENV') !== 'local') {
+            URL::forceScheme('https');
+        }
     }
 }
